@@ -83,7 +83,7 @@ function getCarousel() {
                     prevArrow: "<div class='slick-prev '><i class='glyphicon glyphicon-chevron-left' /></div>",
                     nextArrow: "<div class='slick-next'><i class='glyphicon glyphicon-chevron-right' /></div>",
                     centerMode: true,
-                    slidesToShow: 1,
+                    slidesToShow: (window.innerWidth< 500) ? 1 : 3,
                 })
                 $("div.carousel-wrapper").on("click", (e) => {
                     e.stopPropagation()
