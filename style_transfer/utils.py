@@ -16,10 +16,10 @@ class Utils(object):
 
         img = Image.open(filename)
         wi,hi = img.size
-        if wi > 600 or hi > 600:
-            img = img.resize((600,600),Image.ANTIALIAS)
-
-
+        if wi > 600:
+            img = img.resize((600, hi*600/wi),Image.ANTIALIAS)
+	elif hi > 600:
+	    img = img.resize((wi*600/hi,600),Image.ANTIALIAS)
 
         elif scale is not None:
             img = img.resize((int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS)
