@@ -1,9 +1,8 @@
-# manage.py
-
 from flask_script import Manager
 from api import api
+import os
 
-manager = Manager(api)
-
-if __name__ == "__main__":
-	manager.run()
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT0", 5000))
+    api.app.run(host='0.0.0.0',port=port)
+# manager.run()

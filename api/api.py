@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import time
 import uuid
-from flask_heroku import Heroku
+# from flask_heroku import Heroku
 from style_transfer.utils import Utils
 from style_transfer.neural_style import StylizeImage
 
@@ -13,8 +13,8 @@ template_folder=os.path.join(base_dir, "templates")
 static_folder=os.path.join(base_dir, "assets")
 process_dir = os.path.join(base_dir,"p_dir")
 
-app = Flask("vangogh", template_folder=template_folder, static_folder=static_folder)
-heroku = Heroku(app)
+app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
+# heroku = Heroku(app)
 
 
 models = Utils.load_models(os.path.join(base_dir, "../models"))
@@ -77,7 +77,3 @@ def generateArt():
 
 
     return jsonify({'image': "/assets/stylized_{}.jpg".format(uid)}), 200
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT0", 5000))
-    app.run(host='0.0.0.0',port=port)
