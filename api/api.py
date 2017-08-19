@@ -13,7 +13,7 @@ process_dir = os.path.join(base_dir,"p_dir")
 
 app = Flask("vangogh", template_folder=template_folder, static_folder=static_folder)
 
-models = Utils.load_models("/home/ks/coding/vangogh/models")
+models = Utils.load_models(os.path.join(base_dir, "../models"))
 print models.keys()
 
 
@@ -43,10 +43,10 @@ def generateArt():
     style_file = request.files['style_file']
     content_file = request.files['content_file']
 
-    style_filename = secure_filename("style_image.jpg")
-    content_filename = secure_filename("content_image.jpg")
-    style_file.save(os.path.join("/tmp/vangogh", style_filename))
-    content_file.save(os.path.join("/tmp/vangogh", content_filename))
+    style_filename = secure_filename(style_file.filename)
+    content_filename = secure_filename(content_file.filename)
+    style_file.save(os.path.join(process_dir, "style_image.jpg"))
+    content_file.save(os.path.join(process_dir, "content_image.jpg"))
     model = style_filename[:-4]
 
     print model
