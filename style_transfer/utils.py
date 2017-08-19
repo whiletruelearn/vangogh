@@ -13,10 +13,12 @@ class Utils(object):
 
     @staticmethod
     def load_image(filename, size=None, scale=None):
-        img = Image.open(filename)
 
-        if size is not None:
-            img = img.resize((size, size), Image.ANTIALIAS)
+        img = Image.open(filename)
+        wi,hi = img.size
+        if wi > 600 or hi > 600:
+            img = img.resize((600,600),Image.ANTIALIAS)
+
         elif scale is not None:
             img = img.resize((int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS)
         return img

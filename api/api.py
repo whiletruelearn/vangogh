@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 import os
 import time
+import uuid
 
 from style_transfer.utils import Utils
 from style_transfer.neural_style import StylizeImage
@@ -50,12 +51,14 @@ def generateArt():
     model = style_filename[:-4]
 
     print model
-    output_path = os.path.join(static_folder, "stylized_{}.jpg".format(model))
+
+    uid = uuid.uuid4()
+    output_path = os.path.join(static_folder, "stylized_{}.jpg".format(uid))
     stylize_image(os.path.join(process_dir,"content_image.jpg"),
                   os.path.join(process_dir,"style_image.jpg"),
                   model,output_path)
 
 
-    return jsonify({'image': "/assets/stylized_{}.jpg".format(model)}), 200
+    return jsonify({'image': "/assets/stylized_{}.jpg".format(uid)}), 200
 
 app.run(host='0.0.0.0',port=5000)
