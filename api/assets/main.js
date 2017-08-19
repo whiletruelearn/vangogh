@@ -15,10 +15,11 @@ function callApi(data){
         processData: false,
   		contentType: false,
   		success: function(data, textStatus, jqXHR){
+  		    const src = data.image
             $("#submit").hide()
             $("#back").show()
             $("div.img-block").hide()
-            $("#result-img").attr("src", "/assets/stylized.jpg")
+            $("#result-img").attr("src", src)
             $("#result-img").show()
         },
         error: function(jqXHR, textStatus, errorThrown){
