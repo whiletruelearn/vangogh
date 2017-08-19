@@ -11,12 +11,14 @@ let intervalId = undefined
 let topPosition=0
 let carouselImgs = []
 
+let style_file = ""
+
 function startLoading() {
     $("div.loader").show()
     intervalId = setInterval(() => {
         topPosition = (topPosition == 0) ? 100 : 0
         $("div.loader").animate({top: `${topPosition}%`}, 900)
-    }, 1000)
+    }, 2000)
     
 }
 
@@ -27,7 +29,7 @@ function stopLoading() {
 
 function callApi(data){
     $.ajax({
-        url: '/generate',
+        url: style_file ? `/generate?stylefile=${encodeURIComponent(style_file)}` : `/generate`,
         type: 'POST',
         data: data,
         dataType: 'json',
@@ -37,6 +39,7 @@ function callApi(data){
   		    $("#submit").hide()
             $("#back").show()
             $("div.img-block").hide()
+            $("div.carousel-wrapper").hide()
             $("#result-img").attr("src", data.image)
             setTimeout(() => {
                 stopLoading()
@@ -57,9 +60,7 @@ function generateArt(e) {
 		$.each(el.files, (k,v) => payload.append(el.name,v))
 	})
     startLoading()
-    setTimeout(()=>{
-        callApi(payload)
-    }, 5000)
+    callApi(payload)
 	return false
 }
 
@@ -84,6 +85,8 @@ function getCarousel() {
                     e.stopPropagation()
                     const src = $(e.target).attr("src") || $(e.target).find("img").attr("src")
                     $("#style-preview").attr("src", src)
+                    const parts = src.split("/")
+                    style_file = parts[parts.length-1].replace(".jpg", "")
                 })
             } else {
                 carouselImgs = data
@@ -116,6 +119,7 @@ $("document").ready(() => {
         $("#back").hide()
         $("div.img-block").show()
         $("#result-img").hide()
+        $("div.carousel-wrapper").show()
     })
     getCarousel()
 })

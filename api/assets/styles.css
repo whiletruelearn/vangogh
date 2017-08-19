@@ -27,6 +27,7 @@ div.img-wrapper {
 }
 
 div.img-block{
+	position: relative;
 	border-radius: 5px;
 	background: rgba(102, 119, 97, 0.5);
 	padding: 30px;
