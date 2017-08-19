@@ -16,7 +16,7 @@ print models.keys()
 output_path = os.path.join(static_folder,"stylized.jpg")
 
 def stylize_image(content_image, style_image, model):
-    si = StylizeImage(style_image, content_image, models[model], scale=3, output=output_path, cuda = False)
+    si = StylizeImage(style_image, content_image, models[model], scale=1, output=output_path, cuda = False)
     si.stylize()
 
 
@@ -36,11 +36,12 @@ def generateArt():
     print request.files
     style_file = request.files['style_file']
     content_file = request.files['content_file']
-    model = request.form.get('model')
+
     style_filename = secure_filename(style_file.filename)
     content_filename = secure_filename(content_file.filename)
     style_file.save(os.path.join("/tmp/vangogh", "style_image.jpg"))
     content_file.save(os.path.join("/tmp/vangogh", "content_image.jpg"))
+    model = style_filename[:-4]
 
 
 

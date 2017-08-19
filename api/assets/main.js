@@ -18,7 +18,7 @@ function callApi(data){
             $("#submit").hide()
             $("#back").show()
             $("div.img-block").hide()
-            $("#result-img").attr("src", "/assets/img_1.jpg")
+            $("#result-img").attr("src", "/assets/stylized.jpg")
             $("#result-img").show()
         },
         error: function(jqXHR, textStatus, errorThrown){
