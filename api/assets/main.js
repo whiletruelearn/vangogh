@@ -32,13 +32,14 @@ function callApi(data){
         processData: false,
   		contentType: false,
   		success: function(data, textStatus, jqXHR){
-  		    const src = data.image
-            $("#submit").hide()
+  		    $("#submit").hide()
             $("#back").show()
             $("div.img-block").hide()
-            $("#result-img").attr("src", src)
-            $("#result-img").show()
-            stopLoading()
+            $("#result-img").attr("src", data.image)
+            setTimeout(() => {
+                stopLoading()
+                $("#result-img").show()
+            }, 500)
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log('ERRORS: ' + errorThrown);
