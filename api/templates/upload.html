@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vangogh</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/styles.css" />
+        <link rel="stylesheet" href="assets/vendor.css" />
+        <script type="text/javascript" src="assets/vendor.js"> </script>
+        <script type="text/javascript" src="assets/main.js"> </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top text-center">
+            <img src="/assets/logo.png" height="40px">
+        </nav>
+        <div class="background"></div>
+        <div class="container text-center">
+            <form>
+                <div class="row img-wrapper">
+                    <div class="col-sm-6 text-center" >
+                        <div class="img-block" data-type="content_file">
+                            <div class="preview-container thumbnail">
+                                <img class="preview" id="content-preview" src="/assets/img-placeholder.png"/>
+                            </div>
+                            <input type="file" name="content_file" class="hidden" onchange="change(this, 'content-preview')"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <div class="img-block" data-type="style_file">
+                            <div class="preview-container thumbnail">
+                                <img class="preview" id="style-preview" src="/assets/img-placeholder.png"/>
+                            </div>
+                            <input type="file" name="style_file" class="hidden" onchange="change(this, 'style-preview')"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <img id="result-img" class="img thumbnail" alt="OOPS!! Result image not found. Please try after sometime.">
+                    </div>
+                </div>
+                <div class="row margin-top-10">
+                    <div class="col-sm-12 text-center">
+                        <input id="submit" type="submit" value="Submit" class="btn btn-default form-control"/>
+                        <input id="back" type="button" value="Back" class="btn btn-default"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
