@@ -11,9 +11,10 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision import transforms
 
-import utils
+from utils import Utils
 from transformer_net import TransformerNet
 from vgg import Vgg16
+
 
 class StylizeImage(object):
     def __init__(self,style_image,content_image,model,scale,output,cuda=False):
@@ -21,11 +22,12 @@ class StylizeImage(object):
         self.content_image = content_image
         self.model = model
         self.content_scale = scale
-        self.cuda = cuda
         self.output_image = output
+        self.cuda = cuda
+
 
     def stylize(self):
-        content_image = utils.load_image(self.content_image, scale=self.content_scale)
+        content_image = Utils.load_image(self.content_image, scale=self.content_scale)
         content_transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Lambda(lambda x: x.mul(255))
@@ -46,5 +48,5 @@ class StylizeImage(object):
         if self.cuda:
             output = output.cpu()
         output_data = output.data[0]
-        utils.save_image(self.output_image, output_data)
+        Utils.save_image(self.output_image, output_data)
 

@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import sys
 
+from style_transfer.utils import Utils
 from style_transfer.neural_style import StylizeImage
 
 base_dir=os.path.dirname(os.path.abspath(__file__))
@@ -10,9 +11,13 @@ template_folder=os.path.join(base_dir, "templates")
 static_folder=os.path.join(base_dir, "assets")
 app = Flask("vangogh", template_folder=template_folder, static_folder=static_folder)
 
-def stylize_image(content_image,style_image,model):
-    si = StylizeImage(style_image, content_image, model, scale=3, output="stylized", cuda = False)
-    si.style_image()
+models = Utils.load_models("/home/ks/coding/vangogh/models")
+print models.keys()
+output_path = os.path.join(static_folder,"stylized.jpg")
+
+def stylize_image(content_image, style_image, model):
+    si = StylizeImage(style_image, content_image, models[model], scale=3, output=output_path, cuda = False)
+    si.stylize()
 
 
 
@@ -31,14 +36,16 @@ def generateArt():
     print request.files
     style_file = request.files['style_file']
     content_file = request.files['content_file']
-    model = request.text['model']
+    model = request.form.get('model')
     style_filename = secure_filename(style_file.filename)
     content_filename = secure_filename(content_file.filename)
-    style_file.save(os.path.join("/tmp/vangog", "style_image"))
-    content_file.save(os.path.join("/tmp/vangog", "content_image"))
+    style_file.save(os.path.join("/tmp/vangogh", "style_image.jpg"))
+    content_file.save(os.path.join("/tmp/vangogh", "content_image.jpg"))
 
-    stylize_image("content_image","style_image",model)
-    return jsonify({}), 200
+
+
+    stylize_image('/tmp/vangogh/content_image.jpg','/tmp/vangogh/style_image.jpg',model)
+    return jsonify({'image': output_path}), 200
 
 
 app.run(port=5000)
