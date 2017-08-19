@@ -19,10 +19,12 @@ class Utils(object):
         if wi > 600 or hi > 600:
             img = img.resize((600,600),Image.ANTIALIAS)
 
-        print "Image size is {}".format(img.size)
+
 
         elif scale is not None:
             img = img.resize((int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS)
+
+        print "Image size is {}".format(img.size)
         return img
 
     @staticmethod
