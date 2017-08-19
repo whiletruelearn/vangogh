@@ -1,1 +1,1 @@
-web: sh bin/start-server.sh
+web gunicorn manage:app
