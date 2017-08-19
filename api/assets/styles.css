@@ -18,8 +18,8 @@ a.navbar-brand{
 	display: block;
 }
 img.preview {
-	max-width: 500px;
-	max-height: 500px;
+	max-width: 250px;
+	max-height: 250px;
 }
 div.img-wrapper {
 	margin-top: 10%;
@@ -29,7 +29,7 @@ div.img-block{
 	border-radius: 5px;
 	background: rgba(102, 119, 97, 0.5);
 	padding: 30px;
-	min-height: 450px;
+	margin-top: 50px;
 }
 
 input.hidden{
@@ -56,6 +56,10 @@ div.loader{
     text-align: center;
     color: #666;
     line-height: 250px
+}
+
+#submit{
+	height: 50px;
 }
 
 .margin-top-10{
