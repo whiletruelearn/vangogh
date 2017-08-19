@@ -4,6 +4,7 @@ import os
 import time
 import uuid
 
+from tweet.twitter import Tweet
 from style_transfer.utils import Utils
 from style_transfer.neural_style import StylizeImage
 
@@ -57,6 +58,9 @@ def generateArt():
     stylize_image(os.path.join(process_dir,"content_image.jpg"),
                   os.path.join(process_dir,"style_image.jpg"),
                   model,output_path)
+
+    t = Tweet(output_path,model)
+    t.post_to_twitter()
 
 
     return jsonify({'image': "/assets/stylized_{}.jpg".format(uid)}), 200
