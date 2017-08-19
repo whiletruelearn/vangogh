@@ -43,10 +43,10 @@ def generateArt():
     style_file = request.files['style_file']
     content_file = request.files['content_file']
 
-    style_filename = secure_filename(style_file.filename)
-    content_filename = secure_filename(content_file.filename)
-    style_file.save(os.path.join(process_dir, "style_image.jpg"))
-    content_file.save(os.path.join(process_dir, "content_image.jpg"))
+    style_filename = secure_filename("style_image.jpg")
+    content_filename = secure_filename("content_image.jpg")
+    style_file.save(os.path.join("/tmp/vangogh", style_filename))
+    content_file.save(os.path.join("/tmp/vangogh", content_filename))
     model = style_filename[:-4]
 
     print model
@@ -57,6 +57,5 @@ def generateArt():
 
 
     return jsonify({'image': "/assets/stylized_{}.jpg".format(model)}), 200
-
 
 app.run(host='0.0.0.0',port=5000)
