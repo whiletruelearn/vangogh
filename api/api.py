@@ -1,11 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from werkzeug.utils import secure_filename
 import os
 import sys
 
 from style_transfer.neural_style import StylizeImage
 
-app = Flask("vangogh")
+base_dir=os.path.dirname(os.path.abspath(__file__))
+template_folder=os.path.join(base_dir, "templates")
+static_folder=os.path.join(base_dir, "assets")
+app = Flask("vangogh", template_folder=template_folder, static_folder=static_folder)
 
 def stylize_image(content_image,style_image,model):
     si = StylizeImage(style_image, content_image, model, scale=3, output="stylized", cuda = False)
@@ -23,16 +26,7 @@ def ping():
 @app.route("/generate", methods=['POST', 'GET'])
 def generateArt():
     if request.method == 'GET':
-        return '''
-                <html>
-                    <form method=post enctype=multipart/form-data>
-                        <input type="file" name="style_file" />
-                        <input type="file" name="content_file" />
-                        <input type="text" name ="model" />
-                        <input type="submit" value="Submit"/>
-                    </form>
-                </html>
-            '''
+        return render_template("upload.html")
 
     print request.files
     style_file = request.files['style_file']
@@ -44,7 +38,7 @@ def generateArt():
     content_file.save(os.path.join("/tmp/vangog", "content_image"))
 
     stylize_image("content_image","style_image",model)
-    return "ok"
+    return jsonify({}), 200
 
 
 app.run(port=5000)
