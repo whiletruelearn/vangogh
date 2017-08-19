@@ -28,6 +28,12 @@ def getStaticFile(path):
     return send_from_directory(static_folder,path, cache_timeout=0)
 
 
+
+@app.route('/getStyleImgs', methods=['GET'])
+def getStyleImgs():
+    return jsonify(models.keys()), 200
+
+
 @app.route("/ping", methods=['GET'])
 def ping():
     return jsonify({

@@ -9,6 +9,8 @@ function change(el, id) {
 
 let intervalId = undefined
 let topPosition=0
+let carouselImgs = []
+
 function startLoading() {
     $("div.loader").show()
     intervalId = setInterval(() => {
@@ -61,6 +63,35 @@ function generateArt(e) {
 	return false
 }
 
+function getCarousel() {
+    $.ajax({
+        url: "/getStyleImgs",
+        type: "GET",
+        success: (data) => {
+            if(data.length){
+                data.forEach(x => {
+                    $("div.carousel-wrapper").append(`<div><img class="img thumbnail" src="/assets/style_images/${x}.jpg" width="50px" height="50px" alt="${x}"/></div>`)
+                })
+                $("div.carousel-wrapper").slick({
+                    arrows: true,
+                    prevArrow: "<div class='slick-prev '><i class='glyphicon glyphicon-chevron-left' /></div>",
+                    nextArrow: "<div class='slick-next'><i class='glyphicon glyphicon-chevron-right' /></div>",
+                    centerMode: true,
+                    slidesToShow: 3,
+                    slidesPerRow: 1
+                })
+                $("div.carousel-wrapper").on("click", (e) => {
+                    e.stopPropagation()
+                    const src = $(e.target).attr("src") || $(e.target).find("img").attr("src")
+                    $("#style-preview").attr("src", src)
+                })
+            } else {
+                carouselImgs = data
+            }
+        }
+    })
+}
+
 $("document").ready(() => {
 	$("form").submit(generateArt)
     $("#back").hide()
@@ -86,4 +117,5 @@ $("document").ready(() => {
         $("div.img-block").show()
         $("#result-img").hide()
     })
+    getCarousel()
 })

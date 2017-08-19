@@ -5,6 +5,7 @@ div.background{
 	z-index: -1;
 	filter: blur(3px);
 	background: url("/assets/img_2.jpg");
+	background-size: cover; 
 	height: 100%;
 	width: 100%;
 }
@@ -69,4 +70,28 @@ div.loader{
 .preview-container{
 	background: none !important;
 	border: none !important;
+	position: relative;
+}
+
+.carousel-wrapper{
+	top: 85%;
+}
+
+.carousel-wrapper .thumbnail{
+	display: inline;
+	margin: 10px;
+}
+
+.slick-prev{
+	position: absolute;
+	left: 0;
+	top: 30%;
+	color: white;
+}
+
+.slick-next{
+	position: absolute;
+	right: 0;
+	top: 30%;
+	color: white;
 }
