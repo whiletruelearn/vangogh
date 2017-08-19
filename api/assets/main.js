@@ -48,6 +48,11 @@ function callApi(data){
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log('ERRORS: ' + errorThrown);
+            $(".alert-bar").animate({opacity: "1"}, 500)
+            let timeout = setTimeout(() => {
+                $(".alert-bar").animate({opacity: "0"}, 5000)
+                clearTimeout(timeout)
+            })
             stopLoading()
         }
     });
@@ -78,8 +83,7 @@ function getCarousel() {
                     prevArrow: "<div class='slick-prev '><i class='glyphicon glyphicon-chevron-left' /></div>",
                     nextArrow: "<div class='slick-next'><i class='glyphicon glyphicon-chevron-right' /></div>",
                     centerMode: true,
-                    slidesToShow: 3,
-                    slidesPerRow: 1
+                    slidesToShow: 1,
                 })
                 $("div.carousel-wrapper").on("click", (e) => {
                     e.stopPropagation()
