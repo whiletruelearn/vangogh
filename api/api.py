@@ -16,7 +16,7 @@ print models.keys()
 output_path = os.path.join(static_folder,"stylized.jpg")
 
 def stylize_image(content_image, style_image, model):
-    si = StylizeImage(style_image, content_image, models[model], scale=1, output=output_path, cuda = False)
+    si = StylizeImage(style_image, content_image, models[model], scale=2, output=output_path, cuda = False)
     si.stylize()
 
 
