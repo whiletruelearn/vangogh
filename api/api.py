@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import time
 import uuid
-# from flask_heroku import Heroku
+from tweet.twitter import Tweet
 from style_transfer.utils import Utils
 from style_transfer.neural_style import StylizeImage
 
@@ -74,6 +74,9 @@ def generateArt():
     content_img = os.path.join(process_dir,"content_image.jpg")
     style_img = os.path.join(process_dir,"style_image.jpg") if style_file_params == None else getStyleFile(style_file_params)
     stylize_image(content_img, style_img, model,output_path)
+
+    t = Tweet(output_path,model)
+    t.post_to_twitter()
 
 
     return jsonify({'image': "/assets/stylized_{}.jpg".format(uid)}), 200
