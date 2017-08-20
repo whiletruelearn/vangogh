@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="assets/styles.css" />
         <link rel="stylesheet" href="assets/vendor.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script type="text/javascript" src="assets/vendor.js"> </script>
         <script type="text/javascript" src="assets/main.js"> </script>
     </head>
@@ -16,7 +17,7 @@
         <div class="container text-center">
             <form>
                 <div class="row img-wrapper">
-                    <div class="col-sm-6 text-center" >
+                    <div class="col-xs-6 text-center" >
                         <div class="img-block" data-type="content_file">
                             <div class="preview-container thumbnail">
                                 <img class="preview" id="content-preview" src="/assets/img-placeholder.png"/>
@@ -24,13 +25,14 @@
                             <input type="file" name="content_file" class="hidden" onchange="change(this, 'content-preview')"/>
                         </div>
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-xs-6 text-center">
                         <div class="img-block" data-type="style_file">
                             <div class="preview-container thumbnail">
                                 <img class="preview" id="style-preview" src="/assets/img-placeholder.png"/>
                             </div>
                             <input type="file" name="style_file" class="hidden" onchange="change(this, 'style-preview')"/>
                         </div>
+                        <div class="carousel-wrapper"></div>
                     </div>
                     <div class="col-sm-12 text-center">
                         <img id="result-img" class="img thumbnail" alt="OOPS!! Result image not found. Please try after sometime.">
@@ -43,6 +45,9 @@
                     </div>
                 </div>
             </form>
+            <div class="alert-bar">
+                <span>Ahh! Something went bad!</span>
+            </div>
         </div>
     </body>
 </html>
