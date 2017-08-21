@@ -3,8 +3,8 @@ import tweepy
 from tweepy.api import API
 from time import localtime, strftime
 
-auth = tweepy.OAuthHandler("kj4Ri9oUxO9DUYXlQzwFv0N6f", "TxhfScBNtFftVb845ea57Flsq5XgOYr3PhudxrDrxDSRDSnxKJ")
-auth.set_access_token("899028783855943681-Jdzjn5LCzJrdKxnTl8s7P26gE8alTih", "AcClE6L2aNaEgONYJIz6gwMoxvhxHoHaMiA0UC8lm6IDs")
+auth = tweepy.OAuthHandler("Key1", "Key2")
+auth.set_access_token("Key", "Key")
 api = API(auth)
 
 class Tweet():
