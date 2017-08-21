@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask_compress import Compress
 from werkzeug.utils import secure_filename
 import os
 import time
@@ -47,7 +48,7 @@ def ping():
 def getStyleFile(key):
     return os.path.join(static_folder, "style_images", "{}.jpg".format(key))
 
-@app.route("/generate", methods=['POST', 'GET'])
+@app.route("/", methods=['POST', 'GET'])
 def generateArt():
     style_file_params = request.args.get("stylefile")
 

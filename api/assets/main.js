@@ -29,7 +29,7 @@ function stopLoading() {
 
 function callApi(data){
     $.ajax({
-        url: style_file ? `/generate?stylefile=${encodeURIComponent(style_file)}` : `/generate`,
+        url: style_file ? `/?stylefile=${encodeURIComponent(style_file)}` : `/`,
         type: 'POST',
         data: data,
         dataType: 'json',
